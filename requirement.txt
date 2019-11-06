@@ -1,0 +1,14 @@
+future
+namedtupled
+pylint
+PyYAML
+typing
+pandas
+numpy
+pandasql
+s3fs
+boto3
+pympler
+xlrd
+xlsxwriter
+matplotlib
