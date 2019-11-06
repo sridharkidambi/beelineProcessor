@@ -29,7 +29,7 @@ def excel_date(date1):
     total_seconds = delta.days +2 #* 86400 + delta.seconds
     return total_seconds
 def usingchuck():
-    DAYS_COUNT=16
+    DAYS_COUNT=3
     print((datetime.datetime.now()+ timedelta(days=-DAYS_COUNT)).strftime('%d-%b-%y'))
     # return
     query_string  = 'select distinct `SOW Number`,LOB,Domain,`Supplier Name`,Assignment  from dt_base '
@@ -256,7 +256,7 @@ def usingchuck():
     dt_base_cpy['Approved Date']=dt_base_cpy['Approved Date'].astype(str)
     dt_base_cpy['Approved Date']=dt_base_cpy['Approved Date'].apply(lambda x : None if x=="NaT" else x)
     dt_base_cpy['Approved Date']=pd.to_datetime(dt_base_cpy['Approved Date']).dt.strftime('%d-%b-%y')
-    dt_base_cpy['Month']=pd.to_datetime(dt_base_cpy['Month'], errors = 'coerce').dt.strftime('%m/%y')
+    dt_base_cpy['Month']=pd.to_datetime(dt_base_cpy['Month'], errors = 'coerce').dt.strftime('%b/%y')
     # dt_base_cpy = dt_base_cpy.replace(np.na, '', regex=True)
     # dt_base_cpy['Month']=pd.to_datetime(dt_base_cpy.loc[:,'Month'],format="%m/%y")
 
