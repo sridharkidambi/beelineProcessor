@@ -36,13 +36,13 @@ def usingchuck():
     query_string  = 'select distinct `SOW Number`,LOB,Domain,`Supplier Name`,Assignment  from dt_base '
     query_string1  = 'select distinct month  from dt_base_cpy '
     print('******Read the assignment  file**********')
-    dt_assignt=pd.read_excel('/Users/sridharkidambi/aarthi/assignment_ID.xlsx',index_col=None,header=0,error_bad_lines=False, ignore_index = True)
+    dt_assignt=pd.read_excel(assignment_file_name,index_col=None,header=0,error_bad_lines=False, ignore_index = True)
     # print(dt_assignt)
 
     # return
 
     print('******Read the base copy file**********')
-    dt_base=pd.read_excel('/Users/sridharkidambi/aarthi/base.xlsx',sheet_name='Sheet1',index_col=None,header=0,error_bad_lines=False,date_parser=lambda ts: pd.to_datetime(ts, '%Y-%m-%d %H:%M:%S',
+    dt_base=pd.read_excel(base_file_name,sheet_name='Sheet1',index_col=None,header=0,error_bad_lines=False,date_parser=lambda ts: pd.to_datetime(ts, '%Y-%m-%d %H:%M:%S',
                                                        coerce=True), ignore_index = True)
     dt_base_cpy=dt_base.copy()
     dt_base_cpy['Row_Modified']='NA'
@@ -55,7 +55,7 @@ def usingchuck():
     # return
 
     print('*******Read the new file*********')
-    dt_new=pd.read_excel('/Users/sridharkidambi/aarthi/new.xlsx',index_col=None,header=0,error_bad_lines=False)
+    dt_new=pd.read_excel(new_file_name,index_col=None,header=0,error_bad_lines=False)
     
 
 
@@ -271,7 +271,7 @@ def usingchuck():
     # print(m)
     # dt_base_cpy.loc[m, 'Month'] = dt_base_cpy.loc[m, 'Month'].astype(int).apply(from_excel_ordinal)
     # dt_base_cpy['Month']=pd.to_datetime(dt_base_cpy['Month']).dt.strftime('%d-%b-%y')
-    writer = pd.ExcelWriter('/Users/sridharkidambi/aarthi/CONSOLIDATED_BASE.xlsx', engine='xlsxwriter' )
+    writer = pd.ExcelWriter(consolidated_file_path+'CONSOLIDATED_BASE.xlsx', engine='xlsxwriter' )
     dt_base_cpy.to_excel(writer, sheet_name='Sheet1', index=False )
     # workbook  = writer.book
     # worksheet = writer.sheets['CONSOLIDATED_BASE']
@@ -342,8 +342,20 @@ def usingchuck():
 
 
 if __name__=='__main__':
-    print(len(sys.argv))
-    return
+    # print(len(sys.argv))
+
+    if(len(sys.argv)!=5):
+        print('the arguement count should be equal to 4(base file path ,new file path ,assignment ID file path and the destination file path')
+        exit(0)
+    
+    # print(sys.argv[0])
+    base_file_name=sys.argv[1]
+    new_file_name=sys.argv[2]
+    assignment_file_name=sys.argv[3]
+    consolidated_file_path=sys.argv[4]
+    print(base_file_name)
+    print(new_file_name)
+    print(assignment_file_name)
     strt1=datetime.datetime.now()
     usingchuck()
     strt2=datetime.datetime.now()
