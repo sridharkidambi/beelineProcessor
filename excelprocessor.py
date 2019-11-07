@@ -15,6 +15,7 @@ import math
 import matplotlib.pyplot as plt
 from pandas import DataFrame
 import numpy as np
+import sys
 
 # import StringIO
 # import cherrypy
@@ -182,7 +183,7 @@ def usingchuck():
         # print('combo values:')
         # print(str(mod_subst_dt_new['combo'][item]))
         mod_base_subst_df=dt_base_cpy[dt_base_cpy["combo"] == str(mod_subst_dt_new['combo'][item])]
-        
+
         if (mod_subst_dt_new['Timesheet Status'][item]=='Approval pending'):
                 mod_subst_dt_new['Action Pending With'][item]= mod_subst_dt_new['Approver Name'][item]
 
@@ -341,6 +342,8 @@ def usingchuck():
 
 
 if __name__=='__main__':
+    print(len(sys.argv))
+    return
     strt1=datetime.datetime.now()
     usingchuck()
     strt2=datetime.datetime.now()
