@@ -183,6 +183,8 @@ def usingchuck():
         # print(str(mod_subst_dt_new['combo'][item]))
         mod_base_subst_df=dt_base_cpy[dt_base_cpy["combo"] == str(mod_subst_dt_new['combo'][item])]
         
+        if (mod_subst_dt_new['Timesheet Status'][item]=='Approval pending'):
+                mod_subst_dt_new['Action Pending With'][item]= mod_subst_dt_new['Approver Name'][item]
 
         if(mod_base_subst_df.index.values.size>0):
             if (mod_subst_dt_new['Timesheet Status'][item]=='Payment pending'):
@@ -249,14 +251,14 @@ def usingchuck():
     print('Skipped with iUnits_Zero are  : ' + str(iUnits_Zero))
     print('All Rws in Total  : ' + str(itotal))
     # try:
-    dt_base_cpy['Submitted Date']=pd.to_datetime(dt_base_cpy['Submitted Date']).dt.strftime('%d-%b-%y')
-    dt_base_cpy['Weekend Date']=pd.to_datetime(dt_base_cpy['Weekend Date']).dt.strftime('%d-%b-%y')
-    dt_base_cpy['Week Start Date']=pd.to_datetime(dt_base_cpy['Week Start Date']).dt.strftime('%d-%b-%y')
-    dt_base_cpy['Rejected']=pd.to_datetime(dt_base_cpy['Rejected']).dt.strftime('%d-%b-%y')
+    dt_base_cpy['Submitted Date']=pd.to_datetime(dt_base_cpy['Submitted Date']).dt.strftime('%d-%b-%y').replace('NaT','')
+    dt_base_cpy['Weekend Date']=pd.to_datetime(dt_base_cpy['Weekend Date']).dt.strftime('%d-%b-%y').replace('NaT','')
+    dt_base_cpy['Week Start Date']=pd.to_datetime(dt_base_cpy['Week Start Date']).dt.strftime('%d-%b-%y').replace('NaT','')
+    dt_base_cpy['Rejected']=pd.to_datetime(dt_base_cpy['Rejected']).dt.strftime('%d-%b-%y').replace('NaT','')
     dt_base_cpy['Approved Date']=dt_base_cpy['Approved Date'].astype(str)
     dt_base_cpy['Approved Date']=dt_base_cpy['Approved Date'].apply(lambda x : None if x=="NaT" else x)
-    dt_base_cpy['Approved Date']=pd.to_datetime(dt_base_cpy['Approved Date']).dt.strftime('%d-%b-%y')
-    dt_base_cpy['Month']=pd.to_datetime(dt_base_cpy['Month'], errors = 'coerce').dt.strftime('%b/%y')
+    dt_base_cpy['Approved Date']=pd.to_datetime(dt_base_cpy['Approved Date']).dt.strftime('%d-%b-%y').replace('NaT','')
+    dt_base_cpy['Month']=pd.to_datetime(dt_base_cpy['Month'], errors = 'coerce').dt.strftime('%b/%y').replace('NaT','')
     # dt_base_cpy = dt_base_cpy.replace(np.na, '', regex=True)
     # dt_base_cpy['Month']=pd.to_datetime(dt_base_cpy.loc[:,'Month'],format="%m/%y")
 
