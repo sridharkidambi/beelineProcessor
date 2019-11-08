@@ -33,6 +33,8 @@ Now raise the software request for below:
  
  ### Step 4:
  
+ run the below  command . for execution 
+ 
  #### python excelprocessor.py  “base file path with filename” “new file path with filename” “assignment file path with    filename” “output file path” 
  
 #### substitution ex:  'base file path with filename': "c:\\beeline\\base.xlsx"
