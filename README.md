@@ -35,13 +35,13 @@ Now raise the software request for below:
  
  run the below  command . for execution 
  
- #### python excelprocessor.py  “base file path with filename” “new file path with filename” “assignment file path with    filename” “output file path” 
+ #### python excelprocessor.py  “base file path with filename” “new file path with filename” “assignment file path with filename” “output file path with filename” count of days
  
-#### substitution ex:  'base file path with filename': "c:\\\beeline\\\base.xlsx"
+#### substitution ex:  'base file path with filename': "c:\beeline\base.xlsx"
  
  ### Step 5:
  
- Output will be generated as CONSOLIDATED_BASE.xlsx in the path <output file path> mentioned at Step 4.
+ Output will be generated as CONSOLIDATED_BASE.xlsx in the path <output file path with filename> mentioned at Step 4.
  
 
 
