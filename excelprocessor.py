@@ -344,8 +344,8 @@ def usingchuck():
 if __name__=='__main__':
     # print(len(sys.argv))
 
-    if(len(sys.argv)!=5):
-        print('the arguement count should be equal to 4(base file path ,new file path ,assignment ID file path and the destination file path')
+    if(len(sys.argv)!=6):
+        print('the arguement count should be equal to 5(base file path ,new file path ,assignment ID file path and the destination file path and the days count')
         exit(0)
     
     # print(sys.argv[0])
