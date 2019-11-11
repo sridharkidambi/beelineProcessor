@@ -22,7 +22,7 @@ Now raise the software request for below:
 3.Open the new sheet downloaded , and modify the column J as 'Date.1' as mentioned in the below pictures
  <img width="131" alt="Screenshot 2019-11-08 at 1 40 24 PM" src="https://user-images.githubusercontent.com/8262606/68460376-c3347400-022d-11ea-9436-dce02815ca8e.png">
 
-### Step 3:
+### Step 3(only for once in a laptop):
  run the following command (only for the first time)
  
 #### pip install -r requirement.txt
