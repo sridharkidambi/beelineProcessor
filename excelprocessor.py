@@ -30,8 +30,8 @@ def excel_date(date1):
     total_seconds = delta.days +2 #* 86400 + delta.seconds
     return total_seconds
 def usingchuck():
-    DAYS_COUNT=3
-    print((datetime.datetime.now()+ timedelta(days=-DAYS_COUNT)).strftime('%d-%b-%y'))
+    # DAYS_COUNT=3
+    print((datetime.datetime.now()+ timedelta(days=-int(DAYS_COUNT))).strftime('%d-%b-%y'))
     # return
     query_string  = 'select distinct `SOW Number`,LOB,Domain,`Supplier Name`,Assignment  from dt_base '
     query_string1  = 'select distinct month  from dt_base_cpy '
@@ -78,7 +78,7 @@ def usingchuck():
     dt_new.insert(11,'Submission Category','')
 
     dt_new.rename(columns={'Date': 'Week Start Date','Date.1': 'Weekend Date','ID': 'Assignment','Name': 'Timesheet Status','Rejected Date': 'Rejected'},inplace=True)
-    subst_dt_new =dt_new[(pd.to_datetime(dt_new['Submitted Date']) >= (datetime.datetime.now()+ timedelta(days=-DAYS_COUNT)).strftime('%d-%b-%y')) | ((pd.to_datetime(dt_new["Rejected"])) >= (datetime.datetime.now()+ timedelta(days=-DAYS_COUNT)).strftime('%d-%b-%y')) | (pd.to_datetime(dt_new["Approved Date and Time"])>= (datetime.datetime.now()+ timedelta(days=-DAYS_COUNT)).strftime('%d-%b-%y'))]
+    subst_dt_new =dt_new[(pd.to_datetime(dt_new['Submitted Date']) >= (datetime.datetime.now()+ timedelta(days=-int(DAYS_COUNT))).strftime('%d-%b-%y')) | ((pd.to_datetime(dt_new["Rejected"])) >= (datetime.datetime.now()+ timedelta(days=-int(DAYS_COUNT))).strftime('%d-%b-%y')) | (pd.to_datetime(dt_new["Approved Date and Time"])>= (datetime.datetime.now()+ timedelta(days=-int())).strftime('%d-%b-%y'))]
     # print(len(subst_dt_new.index))
     # return
     # for item in dt_base.index:
@@ -97,13 +97,16 @@ def usingchuck():
         # print(len(assignt_subst_df.index))
         # return
         base_subst_df=dt_base[(dt_base["Project Number"]==subst_dt_new['Project Number'][item]) & (dt_base["Assignment"]==subst_dt_new['Assignment'][item] )]
-        
+        if(len(base_subst_df.index)==0):
+           base_subst_df=dt_base[(dt_base["Project Number"]==subst_dt_new['Project Number'][item])]
+         
         if(len(base_subst_df.index)>0):
                 base_subst_df.reset_index(drop=True, inplace=True)
                 subst_dt_new['SOW Number'][item]=base_subst_df['SOW Number'][0]
                 subst_dt_new['LOB'][item]=base_subst_df['LOB'][0]
                 subst_dt_new['Domain'][item]=base_subst_df['Domain'][0]
                 subst_dt_new['Supplier Name'][item]=base_subst_df['Supplier Name'][0]
+                subst_dt_new['Wipro Manager'][item]=base_subst_df['Wipro Manager'][0]
                 subst_dt_new['DID'][item]=base_subst_df['DID'][0]
                 if(len(assignt_subst_df.index)>0):
                     subst_dt_new['Approver Name'][item]=assignt_subst_df['Name'][len(assignt_subst_df.index)-1]
@@ -125,6 +128,7 @@ def usingchuck():
                 elif((str(subst_dt_new['Timesheet Status'][item]).strip()) == 'Submitted'):
                     subst_dt_new['Timesheet Status'][item]='Approval pending'
                 subst_dt_new['ACTION REQUIRED'][item]=subst_dt_new['Timesheet Status'][item]
+
                 if(((str(subst_dt_new['Timesheet Status'][item]).strip()) == 'Payment pending')| ((str(subst_dt_new['Timesheet Status'][item]).strip()) == 'Approval pending')):
                     subst_dt_new['Ownership'][item]='capone'
                 else:
@@ -271,7 +275,7 @@ def usingchuck():
     # print(m)
     # dt_base_cpy.loc[m, 'Month'] = dt_base_cpy.loc[m, 'Month'].astype(int).apply(from_excel_ordinal)
     # dt_base_cpy['Month']=pd.to_datetime(dt_base_cpy['Month']).dt.strftime('%d-%b-%y')
-    writer = pd.ExcelWriter(consolidated_file_path+'CONSOLIDATED_BASE.xlsx', engine='xlsxwriter' )
+    writer = pd.ExcelWriter(str(consolidated_file_path)+'CONSOLIDATED_BASE.xlsx', engine='xlsxwriter' )
     dt_base_cpy.to_excel(writer, sheet_name='Sheet1', index=False )
     # workbook  = writer.book
     # worksheet = writer.sheets['CONSOLIDATED_BASE']
@@ -353,6 +357,7 @@ if __name__=='__main__':
     new_file_name=sys.argv[2]
     assignment_file_name=sys.argv[3]
     consolidated_file_path=sys.argv[4]
+    DAYS_COUNT= sys.argv[5]
     print(base_file_name)
     print(new_file_name)
     print(assignment_file_name)
