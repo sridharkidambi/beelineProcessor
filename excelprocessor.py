@@ -34,7 +34,7 @@ def usingchuck():
     print((datetime.datetime.now()+ timedelta(days=-int(DAYS_COUNT))).strftime('%d-%b-%y'))
     # return
     query_string  = 'select distinct `SOW Number`,LOB,Domain,`Supplier Name`,Assignment  from dt_base '
-    query_string1  = 'select distinct month  from dt_base_cpy '
+    query_string1  = 'select distinct Month  from dt_base_cpy '
     print('******Read the assignment  file**********')
     dt_assignt=pd.read_excel(assignment_file_name,index_col=None,header=0,error_bad_lines=False, ignore_index = True)
     # print(dt_assignt)
