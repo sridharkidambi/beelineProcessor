@@ -45,7 +45,8 @@ def usingchuck():
     dt_base=pd.read_excel(base_file_name,sheet_name='Sheet1',index_col=None,header=0,error_bad_lines=False,date_parser=lambda ts: pd.to_datetime(ts, '%Y-%m-%d %H:%M:%S',
                                                        coerce=True), ignore_index = True)
     dt_base_cpy=dt_base.copy()
-    dt_base_cpy['Row_Modified']='NA'
+    if 'Row_Modified' not in dt_base_cpy:
+        dt_base_cpy['Row_Modified']='NA'
     # print(dt_base_cpy)
     # return
     uniq_items = psql.sqldf(query_string, locals())
