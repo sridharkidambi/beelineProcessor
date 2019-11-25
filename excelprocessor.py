@@ -79,7 +79,7 @@ def usingchuck():
     dt_new.insert(11,'Submission Category','')
 
     dt_new.rename(columns={'Date': 'Week Start Date','Date.1': 'Weekend Date','ID': 'Assignment','Name': 'Timesheet Status','Rejected Date': 'Rejected'},inplace=True)
-    subst_dt_new =dt_new[(pd.to_datetime(dt_new['Submitted Date']) >= (datetime.datetime.now()+ timedelta(days=-int(DAYS_COUNT))).strftime('%d-%b-%y')) | ((pd.to_datetime(dt_new["Rejected"])) >= (datetime.datetime.now()+ timedelta(days=-int(DAYS_COUNT))).strftime('%d-%b-%y')) | (pd.to_datetime(dt_new["Approved Date and Time"])>= (datetime.datetime.now()+ timedelta(days=-int())).strftime('%d-%b-%y'))]
+    subst_dt_new =dt_new[(pd.to_datetime(dt_new['Submitted Date']) >= (datetime.datetime.now()+ timedelta(days=-int(DAYS_COUNT))).strftime('%d-%b-%y')) | ((pd.to_datetime(dt_new["Rejected"])) >= (datetime.datetime.now()+ timedelta(days=-int(DAYS_COUNT))).strftime('%d-%b-%y')) | (pd.to_datetime(dt_new["Approved Date and Time"])>= (datetime.datetime.now()+ timedelta(days=-int(DAYS_COUNT))).strftime('%d-%b-%y'))]
     # print(len(subst_dt_new.index))
     # return
     # for item in dt_base.index:
