@@ -58,8 +58,18 @@ def usingchuck():
     print('*******Read the new file*********')
     dt_new=pd.read_excel(new_file_name,index_col=None,header=0,error_bad_lines=False)
     
+    cols=pd.Series(dt_new.columns)
+    # d_idx=0;
+    for dup in dt_new.columns.get_duplicates(): 
+        cols[dt_new.columns.get_loc(dup)] = ([dup + '.' + str(d_idx) 
+                                     if d_idx != 0 
+                                     else dup 
+                                     for d_idx in range(dt_new.columns.get_loc(dup).sum())]
+                                    )
 
-
+    dt_new.columns=cols
+    # print(dt_new.columns)
+    # return
     print('*******Prepare  the new file Columns*********')
     dt_new['Amount']=''
     # dt_new['DID']=''
