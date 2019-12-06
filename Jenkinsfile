@@ -3,7 +3,7 @@ pipeline {
 
    parameters{
       string(name: 'NumberOfDays',
-      defaultvalue: '1',
+      defaultValue: '1',
       description: 'backdated days')
    }
 
