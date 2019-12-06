@@ -26,6 +26,7 @@ pipeline {
          steps {
 
             sh 'pip install -r requirement.txt'
+            sh 'apt-get install python-tk'
             sh 'python ./excelprocessor.py "/files/base.xlsx" "/files/new.xlsx" "/files/assignment_ID.xlsx" "/files/" 4'
 
          }
