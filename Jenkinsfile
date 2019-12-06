@@ -16,9 +16,7 @@ pipeline {
 
             sh 'aws s3 sync s3://beelineprocess  files'
             sh 'ls -latr'
-            sh 'cd files'
-            sh 'ls -latr'
-            sh 'cd ..'
+            sh 'cd ./files ls -latr'
 
          }
 
