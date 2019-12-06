@@ -15,13 +15,22 @@ pipeline {
          steps {
 
             sh 'aws s3 sync s3://beelineprocess  files'
-            sh 'aws s3 sync s3://beelineprocess  files'
-            sh 'ls -latr'
 
          }
 
       }
 
+      stage('Process consolidation') {
+
+
+         steps {
+
+            sh 'pip install requirement.txt'
+            sh 'python ./excelprocessor.py "/files/base.xlsx" "/files/new.xlsx" "/files/assignment_ID.xlsx" "/files/" 4'
+
+         }
+
+      }
 
   }
 
