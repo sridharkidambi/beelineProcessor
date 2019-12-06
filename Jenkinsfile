@@ -31,7 +31,7 @@ pipeline {
 
          steps {
 
-            echo '${params.NumberOfDays}''
+            echo '${params.NumberOfDays}'
             sh 'pip install -r requirement.txt'
             sh 'python ./excelprocessor.py "./files/base.xlsx" "./files/new.xlsx" "./files/assignmentID.xlsx" "./files/" ${days_count} '
 
