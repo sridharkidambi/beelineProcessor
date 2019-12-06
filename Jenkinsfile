@@ -1,6 +1,12 @@
 pipeline {
    agent any
 
+   parameters{
+      string(name: 'NumberOfDays',
+      defaultvalue: '1',
+      description: 'backdated days')
+   }
+
    stages {
 
     stage('Checkout') {
