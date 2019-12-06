@@ -30,7 +30,7 @@ pipeline {
          steps {
             sleep(40)
             sh 'pip install -r requirement.txt'
-            sh 'python ./excelprocessor.py "/files/base.xlsx" "/files/new.xlsx" "/files/assignment_ID.xlsx" "/files/" 4'
+            sh 'python ./excelprocessor.py "/files/base.xlsx" "/files/new.xlsx" "/files/assignmentID.xlsx" "/files/" 4'
 
          }
 
