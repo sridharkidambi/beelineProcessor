@@ -15,7 +15,7 @@ pipeline {
          steps {
 
             sh 'aws s3 sync s3://beelineprocess  files'
-            sh 'ls-latr'
+            sh 'ls -latr'
             sh 'cd files'
             sh 'ls -latr'
             sh 'cd ..'
