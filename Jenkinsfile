@@ -27,7 +27,6 @@ pipeline {
             
             sh 'pip install -r requirement.txt'
             sh 'python ./excelprocessor.py "./files/base.xlsx" "./files/new.xlsx" "./files/assignmentID.xlsx" "./files/" 4'
-            sh 'aws s3 sync ".files/CONSOLIDATED_BASE.xlsx" s3://beelineprocess'
 
          }
 
