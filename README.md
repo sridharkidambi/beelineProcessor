@@ -19,8 +19,6 @@ Now raise the software request for below:
 
 2.Download the basefile,newfile and the assignmentID file to a path
 
-3.Open the new sheet downloaded , and modify the column J as 'Date.1' as mentioned in the below pictures
- <img width="131" alt="Screenshot 2019-11-08 at 1 40 24 PM" src="https://user-images.githubusercontent.com/8262606/68460376-c3347400-022d-11ea-9436-dce02815ca8e.png">
 
 ### Step 3(only for once in a laptop):
  run the following command (only for the first time)
@@ -42,6 +40,25 @@ Now raise the software request for below:
  ### Step 5:
  
  Output will be generated as CONSOLIDATED_BASE.xlsx in the path <output file path with filename> mentioned at Step 4.
+ 
+ open the file(CONSOLIDATED_BASE.xlsx ) and do the following format changes
+ 
+ 1.Select the columns from SubmittedDate until WeekendDate
+ 
+ <img width="629" alt="Screenshot 2019-12-02 at 4 04 00 PM" src="https://user-images.githubusercontent.com/8262606/69952763-e0ebb500-151d-11ea-884d-c3249822d189.png">
+<img width="660" alt="Screenshot 2019-12-02 at 4 04 37 PM" src="https://user-images.githubusercontent.com/8262606/69952792-ee08a400-151d-11ea-8d2e-6d074720cc2b.png">
+format: [$-en-US]d-mmm-yy;@
+<img width="500" alt="Screenshot 2019-12-02 at 4 05 41 PM" src="https://user-images.githubusercontent.com/8262606/69952855-11cbea00-151e-11ea-9f28-edad81fca372.png">
+<img width="588" alt="Screenshot 2019-12-02 at 4 05 51 PM" src="https://user-images.githubusercontent.com/8262606/69952893-27411400-151e-11ea-82ad-e0cf8b2b7bc7.png">
+
+#### For Month:
+<img width="215" alt="Screenshot 2019-12-02 at 4 04 52 PM" src="https://user-images.githubusercontent.com/8262606/69952946-48096980-151e-11ea-8f35-aa3330962971.png">
+<img width="655" alt="Screenshot 2019-12-02 at 4 05 04 PM" src="https://user-images.githubusercontent.com/8262606/69953010-640d0b00-151e-11ea-811a-f7b73f313e5a.png">
+
+
+Format: [$-en-US]mmm/yy;@
+<img width="500" alt="Screenshot 2019-12-02 at 4 05 41 PM" src="https://user-images.githubusercontent.com/8262606/69952855-11cbea00-151e-11ea-9f28-edad81fca372.png">
+<img width="588" alt="Screenshot 2019-12-02 at 4 05 51 PM" src="https://user-images.githubusercontent.com/8262606/69952893-27411400-151e-11ea-82ad-e0cf8b2b7bc7.png">
  
 
 
