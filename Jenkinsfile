@@ -38,7 +38,7 @@ pipeline {
 
          steps {
             
-            sh 'aws s3 sync "./files/CONSOLIDATED_BASE.xlsx" s3://beelineprocess'
+            sh 'aws s3 cp "./files/CONSOLIDATED_BASE.xlsx" s3://beelineprocess'
 
          }
 
