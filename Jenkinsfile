@@ -15,8 +15,6 @@ pipeline {
          steps {
 
             sh 'aws s3 sync s3://beelineprocess  files'
-            sh 'ls -latr'
-            sh 'cd ./files ls -latr'
 
          }
 
@@ -29,6 +27,30 @@ pipeline {
             
             sh 'pip install -r requirement.txt'
             sh 'python ./excelprocessor.py "./files/base.xlsx" "./files/new.xlsx" "./files/assignmentID.xlsx" "./files/" 4'
+            sh 'aws s3 sync ".files/CONSOLIDATED_BASE.xlsx" s3://beelineprocess'
+
+         }
+
+      }
+
+
+      stage('Upload to S3') {
+
+
+         steps {
+            
+            sh 'aws s3 sync "./files/CONSOLIDATED_BASE.xlsx" s3://beelineprocess'
+
+         }
+
+      }
+
+      stage('Send email') {
+
+
+         steps {
+            
+            sh 'ls -latr'
 
          }
 
