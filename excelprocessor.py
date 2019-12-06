@@ -388,7 +388,7 @@ if __name__=='__main__':
     new_file_name=sys.argv[2]
     assignment_file_name=sys.argv[3]
     consolidated_file_path=sys.argv[4]
-    DAYS_COUNT= sys.argv[5]
+    DAYS_COUNT= int(sys.argv[5])
     print(base_file_name)
     print(new_file_name)
     print(assignment_file_name)
