@@ -27,8 +27,6 @@ pipeline {
 
          steps {
             sleep(20)
-            sh 'python3 --version'
-            sh 'python3 --version'
             sh 'pip install -r requirement.txt'
             sh 'python ./excelprocessor.py "./files/base.xlsx" "./files/new.xlsx" "./files/assignmentID.xlsx" "/files/" 4'
 
