@@ -25,7 +25,7 @@ pipeline {
 
          steps {
 
-            sh 'pip install requirement.txt'
+            sh 'pip install -r requirement.txt'
             sh 'python ./excelprocessor.py "/files/base.xlsx" "/files/new.xlsx" "/files/assignment_ID.xlsx" "/files/" 4'
 
          }
