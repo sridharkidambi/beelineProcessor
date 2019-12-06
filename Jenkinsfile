@@ -2,7 +2,7 @@ pipeline {
    agent any
 
    parameters{
-      string(name: 'NumberOfDays',
+      number(name: 'NumberOfDays',
       defaultValue: '1',
       description: 'backdated days')
    }
