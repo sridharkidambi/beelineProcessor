@@ -44,6 +44,13 @@ def usingchuck():
     print('******Read the base copy file**********')
     dt_base=pd.read_excel(base_file_name,sheet_name='Sheet1',index_col=None,header=0,error_bad_lines=False,date_parser=lambda ts: pd.to_datetime(ts, '%Y-%m-%d %H:%M:%S',
                                                        coerce=True), ignore_index = True)
+    dt_base['combo_dup']=''
+
+    # for item in dt_base.index:
+    #     dt_base['combo_dup'][item]= str(dt_base['Assignment'][item]) + str(dt_base['Project Number'][item])+ str(excel_date(dt_base['Weekend Date'][item]))
+
+    # print(dt_base)
+    # return
     dt_base_cpy=dt_base.copy()
     if 'Row_Modified' not in dt_base_cpy:
         dt_base_cpy['Row_Modified']='NA'
@@ -78,6 +85,7 @@ def usingchuck():
     dt_new['Action Pending With']='TBD'
     dt_new['Category']='TBD'
     dt_new['combo']=''
+    dt_new['combo_dup']=''
     dt_new['Row_Modified']='NA'
     dt_new.insert(2,'DID','')
     dt_new.insert(3,'SOW Number','')
@@ -134,6 +142,8 @@ def usingchuck():
                     subst_dt_new['Amount'][item]=val_int
 
                 subst_dt_new['combo'][item]=str(subst_dt_new['Assignment'][item]) + str(subst_dt_new['Project Number'][item])+ str(excel_date(subst_dt_new['Weekend Date'][item]))+ str(subst_dt_new['Amount'][item])
+                subst_dt_new['combo_dup'][item]=str(subst_dt_new['Assignment'][item]) + str(subst_dt_new['Project Number'][item])+ str(excel_date(subst_dt_new['Weekend Date'][item]))
+                
                 if((str(subst_dt_new['Timesheet Status'][item]).strip()=='Locked') | ((str(subst_dt_new['Timesheet Status'][item]).strip()=='Approved'))):
                     subst_dt_new['Timesheet Status'][item]='Payment pending'
                 elif((str(subst_dt_new['Timesheet Status'][item]).strip()) == 'Submitted'):
@@ -184,6 +194,11 @@ def usingchuck():
     # print(len(mod_subst_dt_new.index))
     # return
     # print(dt_base["combo"])
+
+    for item in dt_base_cpy.index:
+        dt_base_cpy['combo_dup'][item]= str(dt_base_cpy['Assignment'][item]) + str(dt_base_cpy['Project Number'][item])+ str(excel_date(dt_base_cpy['Weekend Date'][item]))
+    
+
     
     print ('^^^^^^^^^^^^^^^^^^ Process updates and inserts to Base file ^^^^^^^^^^^^^^^^^^^^^^^^^^^^')
     
@@ -251,7 +266,12 @@ def usingchuck():
                     dt_base_cpy.at[index_value, 'Amount']=val_int
             # Arthi request to copy the units amount from the new sheet END
         else:
-            mod_subst_dt_new['Row_Modified'][item]='Added'
+
+            mod_base_subst_dup_df=dt_base_cpy[dt_base_cpy["combo_dup"] == str(mod_subst_dt_new['combo_dup'][item])]
+            if(mod_base_subst_dup_df.index.values.size>0):
+                mod_subst_dt_new['Row_Modified'][item]='Duplicate'
+            else:
+                mod_subst_dt_new['Row_Modified'][item]='Added'
             itotal=itotal+1
             # mod_subst_dt_new['Month'][item]=str(mod_subst_dt_new['Month'][item]) + '/' + '01'  +'/' + str(mod_subst_dt_new['Year'][item])
             mod_subst_dt_new['Month'][item]=str(mod_subst_dt_new['Month'][item]) + '/'  + str(mod_subst_dt_new['Year'][item])
