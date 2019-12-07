@@ -45,7 +45,7 @@ pipeline {
 
             echo '${params.NumberOfDays}'
             sh 'pip install -r requirement.txt'
-            sh 'python ./excelprocessor.py "./files/${BaseFileName}" "./files/${NewFileName}" "./files/a${AssignmentFileName}" "./files/" ${NumberOfDays} '
+            sh 'python ./excelprocessor.py "./files/${BaseFileName}" "./files/${NewFileName}" "./files/${AssignmentFileName}" "./files/" ${NumberOfDays} '
 
          }
 
