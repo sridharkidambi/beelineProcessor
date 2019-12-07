@@ -5,15 +5,11 @@ pipeline {
       string(name: 'NumberOfDays',
       defaultValue: '1',
       description: 'backdated days')
-   }
-
-   parameters{
+   
       string(name: 'BaseFileName',
       defaultValue: 'base.xlsx',
       description: 'base file for consolidatiuon')
-   }
-
-   parameters{
+   
       string(name: 'NewFileName',
       defaultValue: 'new.xlsx',
       description: 'New file with latest status')
