@@ -7,6 +7,24 @@ pipeline {
       description: 'backdated days')
    }
 
+   parameters{
+      string(name: 'BaseFileName',
+      defaultValue: 'base.xlsx',
+      description: 'base file for consolidatiuon')
+   }
+
+   parameters{
+      string(name: 'NewFileName',
+      defaultValue: 'new.xlsx',
+      description: 'New file with latest status')
+   }
+
+   parameters{
+      string(name: 'AssignmentFileName',
+      defaultValue: 'assignment_ID.xlsx',
+      description: 'Assignment Sheet latest')
+   }
+
    stages {
 
     stage('Checkout') {
@@ -33,7 +51,7 @@ pipeline {
 
             echo '${params.NumberOfDays}'
             sh 'pip install -r requirement.txt'
-            sh 'python ./excelprocessor.py "./files/base.xlsx" "./files/new.xlsx" "./files/assignmentID.xlsx" "./files/" ${NumberOfDays} '
+            sh 'python ./excelprocessor.py "./files/${BaseFileName}" "./files/${NewFileName}" "./files/a${AssignmentFileName}" "./files/" ${NumberOfDays} '
 
          }
 
