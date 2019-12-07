@@ -13,9 +13,7 @@ pipeline {
       string(name: 'NewFileName',
       defaultValue: 'new.xlsx',
       description: 'New file with latest status')
-   }
-
-   parameters{
+   
       string(name: 'AssignmentFileName',
       defaultValue: 'assignment_ID.xlsx',
       description: 'Assignment Sheet latest')
