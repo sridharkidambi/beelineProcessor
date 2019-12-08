@@ -17,6 +17,20 @@ pipeline {
       string(name: 'AssignmentFileName',
       defaultValue: 'assignment_ID.xlsx',
       description: 'Assignment Sheet latest')
+
+      string(name: 'JENKINS_ACCESS_KEY_ID',
+      defaultValue: 'AKIAXXFZRLIBYHFAR3A2',
+      description: 'JENKINS_ACCESS_KEY_ID')
+
+      password(name: 'JENKINS_SECRET_ACCESS_KEY',
+      defaultValue: 'X1JZ/DjO9mh5FI2SLBIf1Dh6NaDDF+T/1V/4QYgQ',
+      description: 'JENKINS_SECRET_ACCESS_KEY')
+
+      string(name: 'DEFAULT_REGION',
+      defaultValue: 'us-east-1',
+      description: 'DEFAULT_REGION')
+
+     
    }
 
    stages {
@@ -31,7 +45,9 @@ pipeline {
 
 
          steps {
-
+            sh 'aws configure set aws_access_key_id ${JENKINS_ACCESS_KEY_ID}'
+            sh 'aws configure set aws_secret_access_key ${JENKINS_SECRET_ACCESS_KEY}'
+            sh 'aws configure set default.region ${DEFAULT_REGION}'
             sh 'aws s3 sync s3://beelineprocess  files'
 
          }
