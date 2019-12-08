@@ -1,4 +1,3 @@
-future
 namedtupled
 pylint
 PyYAML
