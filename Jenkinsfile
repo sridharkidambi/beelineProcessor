@@ -60,7 +60,7 @@ pipeline {
          steps {
 
             echo '${params.NumberOfDays}'
-            sh 'pip install -r requirement.txt --user'
+            sh 'pip install -r requirement.txt --user --no-cache-dir'
             sh 'python ./excelprocessor.py "./files/${BaseFileName}" "./files/${NewFileName}" "./files/${AssignmentFileName}" "./files/" ${NumberOfDays} '
 
          }
