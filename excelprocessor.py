@@ -44,7 +44,7 @@ def usingchuck():
     print('******Read the base copy file**********')
     dt_base=pd.read_excel(base_file_name,sheet_name='Sheet1',index_col=None,header=0,error_bad_lines=False,date_parser=lambda ts: pd.to_datetime(ts, '%Y-%m-%d %H:%M:%S',
                                                        coerce=True), ignore_index = True)
-    dt_base['combo_dup']=''
+    # dt_base['combo_dup']=''
 
     # for item in dt_base.index:
     #     dt_base['combo_dup'][item]= str(dt_base['Assignment'][item]) + str(dt_base['Project Number'][item])+ str(excel_date(dt_base['Weekend Date'][item]))
@@ -63,7 +63,7 @@ def usingchuck():
     # return
 
     print('*******Read the new file*********')
-    dt_new=pd.read_excel(new_file_name,index_col=None,header=0,error_bad_lines=False)
+    dt_new=pd.read_excel(new_file_name,index_col=None,header=0,error_bad_lines=False ,na_filter=False)
     
     cols=pd.Series(dt_new.columns)
     # d_idx=0;
@@ -109,10 +109,13 @@ def usingchuck():
     #     print(str(dt_base_cpy['Assignment'][item]))
     #     print(str(dt_base_cpy['Project Number'][item]))
     # return
+    subst_dt_new.fillna('')
     for item in subst_dt_new.index:
         
         assignt_subst_df=dt_assignt[(dt_assignt["ID"]==subst_dt_new['Assignment'][item])]
+        assignt_subst_df.fillna('')
         assignt_subst_df.reset_index(drop=True, inplace=True)
+        assignt_subst_df.fillna('')
         # print(len(assignt_subst_df.index))
         # return
         base_subst_df=dt_base[(dt_base["Project Number"]==subst_dt_new['Project Number'][item]) & (dt_base["Assignment"]==subst_dt_new['Assignment'][item] )]
@@ -142,8 +145,8 @@ def usingchuck():
                     subst_dt_new['Amount'][item]=val_int
 
                 subst_dt_new['combo'][item]=str(subst_dt_new['Assignment'][item]) + str(subst_dt_new['Project Number'][item])+ str(excel_date(subst_dt_new['Weekend Date'][item]))+ str(subst_dt_new['Amount'][item])
-                subst_dt_new['combo_dup'][item]=str(subst_dt_new['Assignment'][item]) + str(subst_dt_new['Project Number'][item])+ str(excel_date(subst_dt_new['Weekend Date'][item]))
-                
+                subst_dt_new['combo_dup'][item]=str(subst_dt_new['Assignment'][item])+ str(int(subst_dt_new['Project Number'][item]))+ str(excel_date(subst_dt_new['Weekend Date'][item]))
+                print(subst_dt_new['combo_dup'][item])
                 if((str(subst_dt_new['Timesheet Status'][item]).strip()=='Locked') | ((str(subst_dt_new['Timesheet Status'][item]).strip()=='Approved'))):
                     subst_dt_new['Timesheet Status'][item]='Payment pending'
                 elif((str(subst_dt_new['Timesheet Status'][item]).strip()) == 'Submitted'):
@@ -195,8 +198,8 @@ def usingchuck():
     # return
     # print(dt_base["combo"])
 
-    for item in dt_base_cpy.index:
-        dt_base_cpy['combo_dup'][item]= str(dt_base_cpy['Assignment'][item]) + str(dt_base_cpy['Project Number'][item])+ str(excel_date(dt_base_cpy['Weekend Date'][item]))
+    # for item in dt_base_cpy.index:
+    #     dt_base_cpy['combo_dup'][item]= str(dt_base_cpy['Assignment'][item]) + str(dt_base_cpy['Project Number'][item])+ str(excel_date(dt_base_cpy['Weekend Date'][item]))
     
 
     
